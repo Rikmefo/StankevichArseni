@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Тематический контроль знаний</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    p {
+      font-size: 1.2em;
+    }
+    a {
+      display: block;
+      margin: 1em 0;
+      color: #2a6496;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 1em;
+      background: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+      margin-bottom: 1em;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: .5em;
+      color: #333;
+    }
+    .form-group input {
+      width: 100%;
+      padding: .5em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .form-group input.invalid {
+      border-color: red;
+    }
+    .form-group input.valid {
+      border-color: green;
+    }
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1em;
+    }
+    .checkbox-group input {
+      margin-right: .5em;
+    }
+    .submit-button, .open-window-button, .change-style-button {
+      width: 100%;
+      padding: 1em;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 1em;
+    }
+    .submit-button {
+      background: #f85a29;
+    }
+    .open-window-button {
+      background: #4CAF50;
+    }
+    .change-style-button {
+      background: #ff9800;
+    }
+  </style>
+</head>
+<body>
+<p>Станкевич Арсений Юрьевич</p>
+<a href="https://instagram.com">Любимый сайт</a>
+<img src="https://thailandsea.net/wp-content/uploads/2016/01/Dostoprimechatelnosti-Pattaji-1.jpg" alt="Пример изображения" id="removable">
+
+<button id="change-style" class="change-style-button">Изменить стиль</button>
+
+<form id="registration-form">
+  <h2>Регистрация</h2>
+  <div class="form-group">
+    <label for="account-number">№ лицевого счета *</label>
+    <input type="text" id="account-number" name="account-number" required>
+  </div>
+  <div class="form-group">
+    <label for="house-number">Номер дома *</label>
+    <input type="text" id="house-number" name="house-number" required>
+  </div>
+  <div class="form-group">
+    <label for="house-letter">Литера дома</label>
+    <input type="text" id="house-letter" name="house-letter">
+  </div>
+  <div class="form-group">
+    <label for="apartment-number">Номер квартиры</label>
+    <input type="text" id="apartment-number" name="apartment-number">
+  </div>
+  <div class="form-group">
+    <label for="apartment-extension">Расширение номера квартиры</label>
+    <input type="text" id="apartment-extension" name="apartment-extension">
+  </div>
+  <div class="form-group">
+    <label for="email">E-mail адрес *</label>
+    <input type="email" id="email" name="email" required>
+  </div>
+  <div class="form-group">
+    <label for="password">Пароль *</label>
+    <input type="password" id="password" name="password" required>
+  </div>
+  <div class="checkbox-group">
+    <input type="checkbox" id="offers" name="offers">
+    <label for="offers">Желаю получать суперпредложения по акциям компании</label>
+  </div>
+  <div class="checkbox-group">
+    <input type="checkbox" id="data-processing" name="data-processing" required>
+    <label for="data-processing">Принимаю условия обработки данных</label>
+  </div>
+  <button type="submit" class="submit-button">Зарегистрироваться</button>
+</form>
+
+<button class="open-window-button" id="open-window">Открыть окно с информацией о глубине цвета</button>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById('registration-form');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      let isValid = true;
+
+      const accountNumber = document.getElementById('account-number');
+      const houseNumber = document.getElementById('house-number');
+      const email = document.getElementById('email');
+      const password = document.getElementById('password');
+      const dataProcessing = document.getElementById('data-processing');
+
+      // Проверка полей на заполненность
+      [accountNumber, houseNumber, email, password].forEach(field => {
+        if (!field.value.trim()) {
+          field.classList.add('invalid');
+          field.classList.remove('valid');
+          isValid = false;
+        } else {
+          field.classList.add('valid');
+          field.classList.remove('invalid');
+        }
+      });
+
+      // Проверка формата email
+      if (email.value && !validateEmail(email.value)) {
+        email.classList.add('invalid');
+        email.classList.remove('valid');
+        isValid = false;
+      } else {
+        email.classList.add('valid');
+        email.classList.remove('invalid');
+      }
+
+      // Проверка длины пароля
+      if (password.value.length < 8) {
+        password.classList.add('invalid');
+        password.classList.remove('valid');
+        isValid = false;
+      } else {
+        password.classList.add('valid');
+        password.classList.remove('invalid');
+      }
+
+      if (isValid) {
+        alert('Форма успешно отправлена!');
+        form.submit();
+      } else {
+        alert('Пожалуйста, исправьте ошибки в форме.');
+      }
+    });
+
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
+
+    // Код для открытия нового окна с информацией о глубине цвета
+    const openWindowButton = document.getElementById('open-window');
+    openWindowButton.addEventListener('click', function() {
+      const colorDepth = window.screen.colorDepth;
+      const newWindow = window.open("", "", "width=800,height=600,scrollbars=no");
+      newWindow.document.write(`<p>Глубина цвета экрана: ${colorDepth} бит на пиксель</p>`);
+    });
+
+    // Код для изменения стиля страницы
+    const changeStyleButton = document.getElementById('change-style');
+    changeStyleButton.addEventListener('click', function() {
+      document.body.style.backgroundColor = 'yellow';
+      document.body.style.fontFamily = 'Arial';
+      document.body.style.fontSize = '12px';
+      document.body.style.color = 'blue';
+      const images = document.querySelectorAll('img');
+      images.forEach(img => {
+        img.style.border = '1px solid green';
+      });
+    });
+
+    // Удаление элемента при щелчке по нему
+    const removableElement = document.getElementById('removable');
+    removableElement.addEventListener('click', function() {
+      removableElement.remove();
+    });
+  });
+</script>
+</body>
+</html>

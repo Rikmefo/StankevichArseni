@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Станкевич Арсений ПЗТ-37 Вариант 74 JavaScript</title>
+    <script>
+        // Задание 1: Работа с объектом Date
+        function showDate() {
+            const date = new Date();
+            const monthYear = `${date.getMonth() + 1}-${date.getFullYear()}`;
+            alert(monthYear);
+        }
+    </script>
+</head>
+<body>
+<!-- Задание 1: Кнопка для показа даты -->
+<button onclick="showDate()">Показать год</button>
+<br><br>
+
+<!-- Задание 2: Работа с операторами и циклами -->
+<script>
+    const p = 74; // Количество повторений
+    const surname = "Станкевич";
+    const name = "Арсений";
+
+    for (let i = 0; i < p; i++) {
+        document.write(`${surname} ${name}<br>`);
+    }
+</script>
+<br>
+
+<!-- Задание 3: Работа с объектом Array -->
+<script>
+    const array = [1, -2, 3, -4, 5, -6];
+    const originalArray = [...array];
+    const sum = array.reduce((acc, val) => acc + val, 0);
+    const average = sum / array.length;
+    document.write(average);
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] > 0) {
+            array[i] = average;
+        }
+    }
+
+    document.write(`Исходный массив: ${originalArray}<br>`);
+    document.write(`Изменённый массив: ${array}<br>`);
+</script>
+<br>
+
+<!-- Задание 4: Работа с объектом Math -->
+<script src="mathCalc.js"></script>
+<script>
+    const x = 5; // Замените на необходимое значение
+    const result = calculate(x);
+
+    if (result !== null) {
+        document.write(`Результат расчёта: ${result}<br>`);
+    }
+</script>
+<br>
+
+<!-- Задание 5: Работа со строками -->
+<script>
+    const s1 = "Станкевич";
+    const s2 = "Гродно, улица Пушкина";
+
+    // Длина строки s1
+    const lengthS1 = s1.length;
+
+    // Сцепление строк
+    const concatenatedString = s1 + " " + s2;
+
+    // Преобразование строки s2 в верхний регистр
+    const upperS2 = s2.toUpperCase();
+    document.write(`Длина строки S1: ${lengthS1}<br>`);
+    document.write(`Сцепленные строки: ${concatenatedString}<br>`);
+    document.write(`Строка S2 в верхнем регистре: ${upperS2}<br>`);
+</script>
+</body>
+</html>

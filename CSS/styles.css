@@ -1,0 +1,18 @@
+/* Комментарий 2: Стили для body */
+body {
+    /* Фоновый рисунок */
+    background-image: url('background.jpg');
+    /* Фоновый рисунок не повторяется */
+    background-repeat: no-repeat;
+    /* Настройка шрифта */
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24mm;
+    color: blue;
+    text-decoration: line-through;
+}
+
+/* Комментарий 3: Стили для списка */
+.sports-list {
+    /* Нумерация строк списка малыми римскими цифрами */
+    list-style-type: armenian;
+}
